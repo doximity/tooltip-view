@@ -31,6 +31,8 @@ public class TooltipView extends TextView {
     private Paint paint;
     private Path tooltipPath;
 
+    private View anchorView;
+
     public TooltipView(Context context) {
         super(context);
         init(null, 0);
@@ -93,6 +95,15 @@ public class TooltipView extends TextView {
         }
         canvas.drawPath(tooltipPath, paint);
         super.onDraw(canvas);
+    }
+
+    public View getAnchorView() {
+        return anchorView;
+    }
+
+    public void setAnchorView(View anchorView) {
+        this.anchorView = anchorView;
+        invalidate();
     }
 
     Paint getTooltipPaint() {

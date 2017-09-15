@@ -25,11 +25,16 @@ public final class ArrowAlignmentHelper {
                 break;
             case ANCHORED_VIEW:
                 middle = rectF.width() / 2;
-                if (view.getAnchoredViewId() != View.NO_ID) {
-                    View anchoredView = ((View) view.getParent())
-                            .findViewById(view.getAnchoredViewId());
-                    middle += anchoredView.getX() + anchoredView.getWidth() / 2 - view.getX()
-                            - view.getWidth() / 2;
+                View anchoredView = view.getAnchorView();
+
+                if (anchoredView == null && view.getAnchoredViewId() != View.NO_ID) {
+                    anchoredView = ((View) view.getParent()).findViewById(view.getAnchoredViewId());
+                }
+
+                if(anchoredView != null) {
+                    int[] loc = new int[2];
+                    anchoredView.getLocationOnScreen(loc);
+                    middle += loc[0] + anchoredView.getWidth() / 2 - view.getX() - view.getWidth() / 2;
                 }
                 break;
         }

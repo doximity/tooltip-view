@@ -89,4 +89,31 @@
         app:tooltipColor="#999900cc"
         app:arrowWidth="120dp"
         app:arrowHeight="60dp" />
+
+    <com.venmo.view.TooltipView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/anchored_bubble"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/header_3"
+        app:cornerRadius="5dp"
+        app:tooltipColor="#8000"
+        android:layout_above="@+id/frame"
+        />
+
+    <FrameLayout
+        android:layout_marginLeft="20dp"
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:id="@+id/anchor"
+            android:background="#22009900"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="anchor in different parent"/>
+    </FrameLayout>
 </RelativeLayout>

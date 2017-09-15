@@ -1,9 +1,12 @@
 package com.venmo.view.tooltip.example;
 
+import com.venmo.view.TooltipView;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class TooltipActivity extends Activity {
@@ -12,6 +15,16 @@ public class TooltipActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tooltip);
+
+        final TooltipView tv = (TooltipView) findViewById(R.id.anchored_bubble);
+        final View anchor = findViewById(R.id.anchor);
+
+
+        anchor.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                tv.setAnchorView(anchor);
+            }
+        });
     }
 
 
