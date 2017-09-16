@@ -24,7 +24,8 @@ public final class ArrowAlignmentHelper {
                 middle -= (offset == 0 ? rectF.width() / 4 : offset);
                 break;
             case ANCHORED_VIEW:
-                middle = rectF.width() / 2;
+                int halfArrow = view.getArrowWidth()/2;
+                middle = halfArrow;
                 View anchoredView = view.getAnchorView();
 
                 if (anchoredView == null && view.getAnchoredViewId() != View.NO_ID) {
@@ -32,9 +33,21 @@ public final class ArrowAlignmentHelper {
                 }
 
                 if(anchoredView != null) {
-                    int[] loc = new int[2];
-                    anchoredView.getLocationOnScreen(loc);
-                    middle += loc[0] + anchoredView.getWidth() / 2 - view.getX() - view.getWidth() / 2;
+                    int[] anchorLoc = new int[2];
+                    int[] viewLoc = new int[2];
+                    anchoredView.getLocationOnScreen(anchorLoc);
+                    view.getLocationOnScreen(viewLoc);
+
+                    // middle of arrow = absolute middle of anchored view - absolute left of tooltip
+                    middle = anchorLoc[0] + (anchoredView.getWidth() / 2) - viewLoc[0];
+
+
+                    if(middle < halfArrow){
+                        middle = halfArrow;
+                    }
+                    if(middle > rectF.right - halfArrow){
+                        middle = rectF.right - halfArrow;
+                    }
                 }
                 break;
         }
